@@ -16,3 +16,4 @@ yarn-error.log
 /.vscode
 /.deptrac.cache
 /reports
+.php-cs-fixer.cache

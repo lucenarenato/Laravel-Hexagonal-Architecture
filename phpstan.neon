@@ -1,11 +1,22 @@
+includes:
+    - ./vendor/nunomaduro/larastan/extension.neon
+
 parameters:
 
     paths:
-        - Modules/Account
+        - app
+        - Modules
 
     # The level 8 is the highest level
     level: 8
 
-    checkMissingIterableValueType: false
+    # ignoreErrors:
+    #    - '#Unsafe usage of new static#'
 
-    checkGenericClassInNonGenericObjectType: false
+    excludePaths:
+        - ./*/*/Tests/*.php
+        - ./_ide_helper.php
+        - ./.phpstorm.meta.php
+        - ./phpinsights.php
+
+    checkMissingIterableValueType: false
