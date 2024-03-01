@@ -1,0 +1,39 @@
+name: Laravel Lint and Test
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  laravel_lint_and_test:
+    name: Laravel Test and PHPStan
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v2
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: '8.3'
+        extensions: mbstring, pdo_mysql, exif, pcntl
+
+    - name: Install Composer Dependencies
+      run: composer install --no-progress --no-suggest --no-interaction --prefer-dist
+
+    - name: Generate Application Key
+      run: php artisan key:generate
+
+    - name: Run phpcs
+      run: tools/scripts/phpstan-all-files.sh
+
+    - name: Run phpinsights
+      run: vendor/bin/phpinsights --no-interaction
+
+    - name: Run phpstan
+      run: tools/scripts/phpstan-all-files.sh
+
+    - name: Run Laravel Tests
+      run: composer test
