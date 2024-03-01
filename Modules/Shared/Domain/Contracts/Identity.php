@@ -2,8 +2,10 @@
 
 namespace Modules\Shared\Domain\Contracts;
 
+use Stringable;
+
 /** @immutable */
-abstract class Identity extends ValueObject implements Nullable
+abstract class Identity extends ValueObject implements Nullable, Stringable
 {
     /** @var int|string */
     public $value;

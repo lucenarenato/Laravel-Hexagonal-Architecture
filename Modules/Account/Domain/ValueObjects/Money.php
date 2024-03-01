@@ -3,12 +3,18 @@
 namespace Modules\Account\Domain\ValueObjects;
 
 use Modules\Shared\Domain\Contracts\ValueObject;
+use Stringable;
 
-class Money extends ValueObject
+class Money extends ValueObject implements Stringable
 {
     public function __construct(
         public int $amount,
     ) {
+    }
+
+    public function __toString(): string
+    {
+        return strval($this->amount);
     }
 
     public static function ZERO(): Money
@@ -69,10 +75,5 @@ class Money extends ValueObject
     public function negate(): Money
     {
         return new Money(-1 * abs($this->amount));
-    }
-
-    public function __toString(): string
-    {
-        return strval($this->amount);
     }
 }

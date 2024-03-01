@@ -10,12 +10,16 @@ use Modules\Account\Tests\Common\AccountTestData;
 use Modules\Account\Tests\Common\ActivityTestData;
 use Tests\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class AccountTest extends TestCase
 {
     /**
      * @test
      */
-    public function calculatesBalance(): void
+    public function calculates_balance(): void
     {
         $accountId = new AccountId(1);
         $account = AccountTestData::defaultAccount()
@@ -41,7 +45,7 @@ class AccountTest extends TestCase
     /**
      * @test
      */
-    public function withdrawalSucceeds(): void
+    public function withdrawal_succeeds(): void
     {
         $accountId = new AccountId(1);
         $account = (new AccountBuilder())
@@ -69,7 +73,7 @@ class AccountTest extends TestCase
     /**
      * @test
      */
-    public function withdrawalFailure(): void
+    public function withdrawal_failure(): void
     {
         $accountId = new AccountId(1);
         $account = (new AccountBuilder())
@@ -97,7 +101,7 @@ class AccountTest extends TestCase
     /**
      * @test
      */
-    public function depositSuccess(): void
+    public function deposit_success(): void
     {
         $accountId = new AccountId(1);
         $account = (new AccountBuilder())

@@ -11,6 +11,10 @@ use Modules\Account\Domain\ValueObjects\AccountId;
 use Modules\Account\Domain\ValueObjects\Money;
 use Tests\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class SendMoneyControllerTest extends TestCase
 {
     use WithoutMiddleware;
@@ -18,7 +22,7 @@ class SendMoneyControllerTest extends TestCase
     /**
      * @test
      */
-    public function sendMoney(): void
+    public function send_money(): void
     {
         $sourceAccountId = 41;
         $targetAccountId = 42;
@@ -28,17 +32,18 @@ class SendMoneyControllerTest extends TestCase
         $sendMoneyUseCase = Mockery::spy(SendMoneyUseCase::class);
         $this->app->instance(SendMoneyUseCase::class, $sendMoneyUseCase);
 
-        $url = "/api/accounts/send/$sourceAccountId/$targetAccountId/$amount";
+        $url = "/api/accounts/send/{$sourceAccountId}/{$targetAccountId}/{$amount}";
         $response = $this->json('POST', $url);
 
         $response->assertStatus(200);
 
         $sendMoneyUseCase->shouldHaveReceived('sendMoney')
-            ->withArgs(fn ($command) => $command == new SendMoneyCommand(
+            ->withArgs(
+                fn ($command) => $command == new SendMoneyCommand(
                     sourceAccountId: new AccountId($sourceAccountId),
                     targetAccountId: new AccountId($targetAccountId),
                     money: new Money($amount),
-                )
+                ),
             )
             ->once();
     }

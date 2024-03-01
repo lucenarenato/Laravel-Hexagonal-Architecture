@@ -2,18 +2,20 @@
 
 namespace Modules\Account\Infrastructure\Adapter\Out\Persistence\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 use Modules\Account\Infrastructure\Adapter\Out\Persistence\Factories\AccountModelFactory;
 
 /**
  * Modules\Account\Infrastructure\Adapter\Out\Persistence\Models\Account.
  *
  * @property int $id
- * @property \Illuminate\Support\Carbon|null $created_at
- * @property \Illuminate\Support\Carbon|null $updated_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\Modules\Account\Infrastructure\Adapter\Out\Persistence\Models\ActivityModel[] $activityModels
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection|array<\Modules\Account\Infrastructure\Adapter\Out\Persistence\Models\ActivityModel> $activityModels
  * @property-read int|null $activity_models_count
  * @method static \Modules\Account\Infrastructure\Adapter\Out\Persistence\Factories\AccountFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|AccountModel newModelQuery()
@@ -29,13 +31,13 @@ class AccountModel extends Model
 
     protected $guarded = [];
 
-    protected static function newFactory(): AccountModelFactory
-    {
-        return AccountModelFactory::new();
-    }
-
     public function activityModels(): HasMany
     {
         return $this->hasMany(ActivityModel::class, 'owner_account_id', 'id');
+    }
+
+    protected static function newFactory(): AccountModelFactory
+    {
+        return AccountModelFactory::new();
     }
 }

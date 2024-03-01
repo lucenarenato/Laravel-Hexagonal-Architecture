@@ -16,6 +16,10 @@ use Modules\Account\Tests\Common\AccountTestData;
 use Modules\Account\Tests\Common\ActivityTestData;
 use Tests\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class AccountPersistenceAdapterTest extends TestCase
 {
     use RefreshDatabase;
@@ -30,7 +34,7 @@ class AccountPersistenceAdapterTest extends TestCase
     }
 
     /** @test */
-    public function loadsAccount(): void
+    public function loads_account(): void
     {
         $this->prepareForLoadsAccount();
 
@@ -42,7 +46,7 @@ class AccountPersistenceAdapterTest extends TestCase
     }
 
     /** @test */
-    public function updatesActivities(): void
+    public function updates_activities(): void
     {
         $sourceAccountModel = AccountModel::factory()->create();
         $targetAccountModel = AccountModel::factory()->create();
@@ -61,8 +65,8 @@ class AccountPersistenceAdapterTest extends TestCase
                         ->withSourceAccount($sourceAccountId)
                         ->withTargetAccount($targetAccountId)
                         ->withMoney(Money::of(1))
-                        ->build()
-                )
+                        ->build(),
+                ),
             )
             ->build();
 
@@ -85,7 +89,7 @@ class AccountPersistenceAdapterTest extends TestCase
                     ->state([
                         'created_at' => '2022/09/01',
                         'amount' => 500,
-                    ])
+                    ]),
             )
             ->create();
 

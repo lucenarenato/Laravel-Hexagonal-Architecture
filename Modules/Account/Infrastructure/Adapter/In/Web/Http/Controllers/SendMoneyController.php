@@ -28,7 +28,7 @@ class SendMoneyController extends Controller
                 sourceAccountId: new AccountId($sourceAccountId),
                 targetAccountId: new AccountId($targetAccountId),
                 money: new Money($money),
-            )
+            ),
         );
 
         return Response::json([]);

@@ -18,6 +18,10 @@ use Modules\Account\Domain\ValueObjects\Money;
 use Modules\Account\Tests\Common\ActivityTestData;
 use Tests\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class SendMoneyServiceTest extends TestCase
 {
     /** @var MockInterface|LoadAccountPort */
@@ -50,7 +54,7 @@ class SendMoneyServiceTest extends TestCase
     /**
      * @test
      */
-    public function givenWithdrawalFails_thenOnlySourceAccountIsLockedAndReleased(): void
+    public function given_withdrawal_fails_then_only_source_account_is_locked_and_released(): void
     {
         $sourceAccountId = new AccountId(41);
         $sourceAccount = $this->givenAnAccountWithId($sourceAccountId);
@@ -79,7 +83,7 @@ class SendMoneyServiceTest extends TestCase
     /**
      * @test
      */
-    public function transactionSucceeds(): void
+    public function transaction_succeeds(): void
     {
         $sourceAccount = $this->givenSourceAccount();
         $targetAccount = $this->givenTargetAccount();

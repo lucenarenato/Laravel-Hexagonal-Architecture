@@ -36,7 +36,7 @@ class ActivityModelFactory extends Factory
 
     public function out(): static
     {
-        return $this->state(function (array $attributes, Model|null $ownerAccount) {
+        return $this->state(function (array $attributes, ?Model $ownerAccount) {
             if (! $ownerAccount) {
                 $ownerAccount = AccountModel::factory()->create();
             }
@@ -53,7 +53,7 @@ class ActivityModelFactory extends Factory
 
     public function in(): static
     {
-        return $this->state(function (array $attributes, Model|null $ownerAccount) {
+        return $this->state(function (array $attributes, ?Model $ownerAccount) {
             if (! $ownerAccount) {
                 $ownerAccount = AccountModel::factory()->create();
             }

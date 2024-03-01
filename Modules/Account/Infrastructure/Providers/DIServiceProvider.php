@@ -18,13 +18,8 @@ class DIServiceProvider extends ServiceProvider
      * Called before routes are registered.
      *
      * Register any model bindings or pattern based filters.
-     *
-     * @return void
      */
-    public function boot()
-    {
-        //
-    }
+    public function boot() {}
 
     public function register(): void
     {

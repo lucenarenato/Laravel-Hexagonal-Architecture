@@ -24,13 +24,11 @@ class Account extends AggregateRoot
          * @var AccountId
          */
         public $id,
-
         /**
          * The baseline balance of the account. This was the balance of the account before the first
          * activity in the activityWindow.
          */
         public readonly Money $baselineBalance,
-
         /**
          * The window of latest activities on this account.
          */
@@ -62,7 +60,7 @@ class Account extends AggregateRoot
     {
         return Money::add(
             $this->baselineBalance,
-            $this->activityWindow->calculateBalance($this->id)
+            $this->activityWindow->calculateBalance($this->id),
         );
     }
 
@@ -116,7 +114,7 @@ class Account extends AggregateRoot
     {
         return Money::add(
             $this->calculateBalance(),
-            $money->negate()
+            $money->negate(),
         )->isPositiveOrZero();
     }
 }

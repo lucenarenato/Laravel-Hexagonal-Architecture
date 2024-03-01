@@ -15,8 +15,8 @@ use Modules\Account\Infrastructure\Adapter\Out\Persistence\Repositories\Activity
 class AccountPersistenceAdapter implements LoadAccountPort, UpdateAccountStatePort
 {
     public function __construct(
-        private AccountMapper $accountMapper,
-        private ActivityRepository $activityRepository,
+        private readonly AccountMapper $accountMapper,
+        private readonly ActivityRepository $activityRepository,
     ) {
     }
 
@@ -26,24 +26,24 @@ class AccountPersistenceAdapter implements LoadAccountPort, UpdateAccountStatePo
 
         $activityModels = $this->activityRepository->findByOwnerSince(
             $accountId->value,
-            $baselineDate
+            $baselineDate,
         );
 
         $withdrawalBalance = $this->activityRepository->getDepositBalanceUntil(
             $accountId->value,
-            $baselineDate
+            $baselineDate,
         );
 
         $depositBalance = $this->activityRepository->getWithdrawalBalanceUntil(
             $accountId->value,
-            $baselineDate
+            $baselineDate,
         );
 
         return $this->accountMapper->mapToDomainEntity(
             $accountModel,
             $activityModels,
             $withdrawalBalance,
-            $depositBalance
+            $depositBalance,
         );
     }
 

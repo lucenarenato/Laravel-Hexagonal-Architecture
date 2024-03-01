@@ -13,10 +13,10 @@ use Modules\Account\Application\Port\Out\UpdateAccountStatePort;
 class SendMoneyService implements SendMoneyUseCase
 {
     public function __construct(
-        private MoneyTransferProperties $moneyTransferProperties,
-        private LoadAccountPort $loadAccountPort,
-        private UpdateAccountStatePort $updateAccountStatePort,
-        private AccountLock $accountLock,
+        private readonly MoneyTransferProperties $moneyTransferProperties,
+        private readonly LoadAccountPort $loadAccountPort,
+        private readonly UpdateAccountStatePort $updateAccountStatePort,
+        private readonly AccountLock $accountLock,
     ) {
     }
 

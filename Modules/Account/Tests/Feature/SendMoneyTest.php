@@ -14,6 +14,10 @@ use Modules\Account\Infrastructure\Adapter\Out\Persistence\Models\AccountModel;
 use Modules\Account\Infrastructure\Adapter\Out\Persistence\Models\ActivityModel;
 use Tests\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class SendMoneyTest extends TestCase
 {
     use RefreshDatabase;
@@ -37,7 +41,7 @@ class SendMoneyTest extends TestCase
                     ->state([
                         'created_at' => '2022/09/01',
                         'amount' => 500,
-                    ])
+                    ]),
             )
             ->create()->id;
         $this->targetAccountId = AccountModel::factory()->create()->id;
@@ -46,7 +50,7 @@ class SendMoneyTest extends TestCase
     /**
      * @test
      */
-    public function sendMoney(): void
+    public function send_money(): void
     {
         $initialSourceBalance = $this->sourceAccount()->calculateBalance();
         $initialTargetBalance = $this->targetAccount()->calculateBalance();
@@ -54,31 +58,30 @@ class SendMoneyTest extends TestCase
         $response = $this->whenSendMoney(
             $this->sourceAccountId(),
             $this->targetAccountId(),
-            $this->transferAmount()
+            $this->transferAmount(),
         );
 
         $response->assertStatus(200);
 
         $this->assertEquals(
             $initialSourceBalance->minus($this->transferAmount()),
-            $this->sourceAccount()->calculateBalance()
+            $this->sourceAccount()->calculateBalance(),
         );
 
         $this->assertEquals(
             $initialTargetBalance->plus($this->transferAmount()),
-            $this->targetAccount()->calculateBalance()
+            $this->targetAccount()->calculateBalance(),
         );
     }
 
     private function whenSendMoney(
         AccountId $sourceAccountId,
-            AccountId $targetAccountId,
-            Money $amount
+        AccountId $targetAccountId,
+        Money $amount,
     ): TestResponse {
-        $url = "/api/accounts/send/$sourceAccountId/$targetAccountId/$amount";
-        $response = $this->json('POST', $url);
+        $url = "/api/accounts/send/{$sourceAccountId}/{$targetAccountId}/{$amount}";
 
-        return $response;
+        return $this->json('POST', $url);
     }
 
     private function sourceAccount(): Account

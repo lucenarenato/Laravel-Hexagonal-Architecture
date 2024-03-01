@@ -7,6 +7,10 @@ use Modules\Account\Infrastructure\Adapter\Out\Persistence\Models\AccountModel;
 use Modules\Account\Infrastructure\Adapter\Out\Persistence\Models\ActivityModel;
 use Tests\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class ActivityModelTest extends TestCase
 {
     use RefreshDatabase;

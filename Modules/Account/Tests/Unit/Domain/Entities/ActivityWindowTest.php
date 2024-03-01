@@ -9,12 +9,16 @@ use Modules\Account\Domain\ValueObjects\Money;
 use Modules\Account\Tests\Common\ActivityTestData;
 use Tests\TestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class ActivityWindowTest extends TestCase
 {
     /**
      * @test
      */
-    public function calculatesStartTimestamp(): void
+    public function calculates_start_timestamp(): void
     {
         $window = new ActivityWindow(
             ActivityTestData::defaultActivity()->withTimestamp($this->startDate())->build(),
@@ -28,7 +32,7 @@ class ActivityWindowTest extends TestCase
     /**
      * @test
      */
-    public function calculatesEndTimestamp(): void
+    public function calculates_end_timestamp(): void
     {
         $window = new ActivityWindow(
             ActivityTestData::defaultActivity()->withTimestamp($this->startDate())->build(),
@@ -42,7 +46,7 @@ class ActivityWindowTest extends TestCase
     /**
      * @test
      */
-    public function calculatesBalance(): void
+    public function calculates_balance(): void
     {
         $account1 = new AccountId(1);
         $account2 = new AccountId(2);
