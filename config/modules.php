@@ -27,7 +27,7 @@ return [
 
     'stubs' => [
         'enabled' => true,
-        'path' => base_path('stubs/nwidart-stubs'),
+        'path' => base_path('stubs/hexagonal-architecture'),
         'files' => [
             'routes/web' => 'Infrastructure/Adapter/In/Web/Routes/web.php',
             'routes/api' => 'Infrastructure/Adapter/In/Web/Routes/api.php',
