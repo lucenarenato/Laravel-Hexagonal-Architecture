@@ -75,3 +75,8 @@ Feel free to contribute :)
 ## License
 
 The example is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+## Fontes:
+- https://www.linkedin.com/pulse/explorando-arquitetura-hexagonal-em-laravel-uma-de-design-bernardes/
+- https://medium.com/@osmarrod18/mastering-hexagonal-architecture-in-laravel-a-dive-into-domain-driven-design-8d7c65777252
+- https://fideloper.com/hexagonal-architecture
